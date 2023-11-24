@@ -1,0 +1,38 @@
+{
+  "name": "react-graphql-todo",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node src/server.ts",
+    "build": "echo 'No build step'",
+    "start": "ts-node src/server.ts",
+    "lint": "run-p -l -c --aggregate-output lint:*",
+    "lint:eslint": "yarn run eslint .",
+    "lint:prettier": "yarn run prettier --check .",
+    "format": "run-s format:prettier format:eslint",
+    "format:eslint": "yarn run eslint --fix .",
+    "format:prettier": "yarn run prettier --write .",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.9.5",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "graphql": "^16.8.1",
+    "mongoose": "^8.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.9.5",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2"
+  }
+}
