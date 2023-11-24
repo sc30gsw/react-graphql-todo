@@ -2,7 +2,7 @@ type User {
   id: ID!
   name: String!
   email: String!
-  password: String!
+  hashedPassword: String!
   createdAt: String!
   updatedAt: String!
   todos: [Todo!]!
@@ -24,8 +24,13 @@ type Query {
 }
 
 type Mutation {
-  createUser(name: String!, email: String!, password: String!): User!
+  createUser(name: String!, email: String!, password: String!): AuthPayload!
   createTodo(text: String!, userId: ID!): Todo!
   updateTodo(id: ID!, text: String, completed: Boolean): Todo!
   deleteTodo(id: ID!): Todo!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
 }
