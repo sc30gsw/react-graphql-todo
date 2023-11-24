@@ -1,22 +1,24 @@
-import express, { Application, Request, Response } from 'express'
+import express from 'express'
+import 'dotenv/config'
+import cors from 'cors'
+import mongoose from 'mongoose'
 
-const app: Application = express()
-const PORT = 3000
+const app = express()
+app.use(cors({ origin: 'http://localhost:3000' }))
+const PORT = process.env.PORT || ''
+const url = process.env.DATABASE_URL || ''
+
+// DB接続
+try {
+  mongoose.set('strictQuery', true)
+  mongoose.connect(url)
+  console.log('DB接続中')
+} catch (err) {
+  console.log(err)
+}
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.get('/', async (_req: Request, res: Response) => {
-  return res.status(200).send({
-    message: 'Hello World! hoge',
-  })
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
 })
-
-try {
-  app.listen(PORT, () => {
-    console.log(`dev server running at: http://localhost:${PORT}/`)
-  })
-} catch (e) {
-  if (e instanceof Error) {
-    console.error(e.message)
-  }
-}
