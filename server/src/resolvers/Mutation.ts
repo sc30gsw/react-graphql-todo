@@ -93,7 +93,68 @@ export const createTodo = async (
 
     return newTodo
   } catch (err) {
-    console.log(err)
+    throw new Error('Internal Server Error')
+  }
+}
+
+export const updateTodo = async (
+  _: unknown,
+  args: { todoId: string; text: string; completed?: boolean },
+  context: { userId: string | null },
+) => {
+  try {
+    if (!context.userId || !args.todoId) throw new Error('Invalid ID')
+
+    const existingTodo = await prisma.todo.findUnique({
+      where: { id: args.todoId },
+    })
+
+    if (!existingTodo) throw new Error('Todo not found')
+
+    if (context.userId !== existingTodo.userId)
+      throw new Error('UserId not match')
+
+    const updatedTodo = await prisma.todo.update({
+      where: { id: args.todoId },
+      data: {
+        text: args.text,
+        completed: args.completed ? args.completed : false,
+      },
+      include: {
+        user: true,
+      },
+    })
+
+    return updatedTodo
+  } catch (err) {
+    throw new Error('Internal Server Error')
+  }
+}
+
+export const deleteTodo = async (
+  _: unknown,
+  args: { todoId: string },
+  context: { userId: string | null },
+) => {
+  try {
+    if (!context.userId || !args.todoId) throw new Error('Invalid ID')
+
+    const existingTodo = await prisma.todo.findUnique({
+      where: { id: args.todoId },
+    })
+
+    if (!existingTodo) throw new Error('Todo not found')
+
+    if (context.userId !== existingTodo.userId)
+      throw new Error('UserId not match')
+
+    const deletedTodo = await prisma.todo.delete({
+      where: { id: args.todoId },
+      include: { user: true },
+    })
+
+    return deletedTodo
+  } catch (err) {
     throw new Error('Internal Server Error')
   }
 }

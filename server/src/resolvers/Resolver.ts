@@ -1,10 +1,18 @@
-import { createUser, login, createTodo } from './Mutation'
+import {
+  createUser,
+  login,
+  createTodo,
+  updateTodo,
+  deleteTodo,
+} from './Mutation'
 
 const resolvers = {
   Mutation: {
     createUser,
     login,
     createTodo,
+    updateTodo,
+    deleteTodo,
   },
 }
 
