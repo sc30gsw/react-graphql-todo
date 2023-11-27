@@ -5,10 +5,11 @@ import {
   updateTodo,
   deleteTodo,
 } from './Mutation'
-import { todos } from './Query'
+import { user, todos } from './Query'
 
 const resolvers = {
   Query: {
+    user,
     todos,
   },
 
