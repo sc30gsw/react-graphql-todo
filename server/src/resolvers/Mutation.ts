@@ -99,7 +99,7 @@ export const createTodo = async (
 
 export const updateTodo = async (
   _: unknown,
-  args: { todoId: string; text: string; completed?: boolean },
+  args: { todoId: string; text?: string; completed?: boolean },
   context: { userId: string | null },
 ) => {
   try {

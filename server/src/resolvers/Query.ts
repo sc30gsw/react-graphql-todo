@@ -29,6 +29,7 @@ export const todos = async (
 
     const todos = await prisma.todo.findMany({
       where: { userId: context.userId },
+      orderBy: { createdAt: 'desc' },
       include: { user: true },
     })
 
