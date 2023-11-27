@@ -15,7 +15,6 @@ const app = express()
 app.use(cors({ origin: 'http://localhost:3000' }))
 app.use(express.json())
 
-const PORT = process.env.PORT as string
 const url = process.env.DATABASE_URL as string
 
 // DB接続
