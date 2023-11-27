@@ -37,3 +37,26 @@ export const todos = async (
     throw new Error('Internal Server Error')
   }
 }
+
+export const todo = async (
+  _: unknown,
+  args: { todoId: string },
+  context: { userId: string | null },
+) => {
+  try {
+    if (!args.todoId || !context.userId) throw new Error('Invalid ID')
+
+    const todo = await prisma.todo.findUnique({
+      where: { id: args.todoId },
+      include: { user: true },
+    })
+
+    if (!todo) throw new Error('Todo not found')
+
+    return todo
+  } catch (err: any) {
+    console.log(err.message)
+
+    throw new Error('Internal Server Error')
+  }
+}
