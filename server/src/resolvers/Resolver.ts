@@ -1,8 +1,9 @@
-import { createUser } from './Mutation'
+import { createUser, login } from './Mutation'
 
 const resolvers = {
   Mutation: {
     createUser,
+    login,
   },
 }
 

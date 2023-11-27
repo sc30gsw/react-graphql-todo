@@ -29,7 +29,7 @@ export const createUser = async (
 
     const token = jwt.sign(
       { userId: newUser.id },
-      process.env.JWT_SECRET || '',
+      process.env.JWT_SECRET as string,
       { expiresIn: '24h' },
     )
 
@@ -38,7 +38,38 @@ export const createUser = async (
       user: newUser,
     }
   } catch (err) {
-    console.log(err)
+    throw new Error('Internal Server Error')
+  }
+}
+
+export const login = async (
+  _: unknown,
+  args: { email: string; password: string },
+) => {
+  try {
+    const { email, password } = args
+
+    if (!email || !password) throw new Error('Invalid ID')
+
+    const user = await prisma.user.findUnique({ where: { email } })
+
+    if (!user) throw new Error('User not found')
+
+    const isCorrectPassword = await bcrypt.compare(
+      password,
+      user.hashedPassword,
+    )
+
+    if (!isCorrectPassword) throw new Error('Password is invalid')
+
+    const token = jwt.sign(
+      { userId: user.id },
+      process.env.JWT_SECRET as string,
+      { expiresIn: '24h' },
+    )
+
+    return { token, user }
+  } catch (err) {
     throw new Error('Internal Server Error')
   }
 }
