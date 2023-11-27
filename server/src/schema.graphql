@@ -25,7 +25,7 @@ type Query {
 type Mutation {
   createUser(name: String!, email: String!, password: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload
-  createTodo(text: String!, userId: ID!): Todo!
+  createTodo(text: String!): Todo!
   updateTodo(id: ID!, text: String, completed: Boolean): Todo!
   deleteTodo(id: ID!): Todo!
 }

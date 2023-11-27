@@ -73,3 +73,27 @@ export const login = async (
     throw new Error('Internal Server Error')
   }
 }
+
+export const createTodo = async (
+  _: unknown,
+  args: { text: string },
+  context: { userId: string | null },
+) => {
+  try {
+    if (!context.userId) throw new Error('Invalid ID')
+
+    const newTodo = await prisma.todo.create({
+      data: {
+        text: args.text,
+        completed: false,
+        user: { connect: { id: context.userId } },
+      },
+      include: { user: true },
+    })
+
+    return newTodo
+  } catch (err) {
+    console.log(err)
+    throw new Error('Internal Server Error')
+  }
+}

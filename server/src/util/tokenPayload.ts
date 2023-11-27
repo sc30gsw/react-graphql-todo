@@ -7,14 +7,14 @@ type TokenPayload = {
 }
 
 const getTokenPayload = (token: string): TokenPayload =>
-  jwt.verify(token, process.env.JWT_SECRET || '') as TokenPayload
+  jwt.verify(token, process.env.JWT_SECRET as string) as TokenPayload
 
 const getUserId = (req?: IncomingMessage, authToken?: string) => {
   if (req) {
     const authHeader = req.headers.authorization
 
     if (authHeader) {
-      const token = authHeader.replace('Bearer', '')
+      const token = authHeader.replace('Bearer ', '')
 
       if (!token) {
         throw new Error('Token is undefined')
@@ -22,7 +22,6 @@ const getUserId = (req?: IncomingMessage, authToken?: string) => {
 
       // トークンの復号
       const { userId } = getTokenPayload(token)
-
       return userId
     }
   } else if (authToken) {
