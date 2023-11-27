@@ -18,9 +18,9 @@ type Todo {
 }
 
 type Query {
-  user(id: ID!): User
+  user: User
   todos: [Todo!]!
-  todo(id: ID!): Todo
+  todo(todoId: ID!): Todo
 }
 
 type Mutation {
