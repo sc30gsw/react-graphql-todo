@@ -25,6 +25,7 @@ model Todo {
   text      String
   completed Boolean
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   userId    String   @db.ObjectId
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
