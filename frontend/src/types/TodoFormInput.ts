@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const todoSchema = z.object({
   text: z
     .string()
-    .min(1, 'email is required')
+    .min(1, 'text is required')
     .max(128, 'please enter at max 128 characters'),
 })
 

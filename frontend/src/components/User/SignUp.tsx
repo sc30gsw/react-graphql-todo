@@ -60,18 +60,16 @@ const SignUp = () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             control={control as any}
             disabled={isSubmitting}
-            required
             autoFocus
           />
           <Input
             id="email"
             name="email"
             placeholder="Email"
-            type="email"
+            type="text"
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             control={control as any}
             disabled={isSubmitting}
-            required
           />
           <Input
             id="password"
@@ -81,7 +79,6 @@ const SignUp = () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             control={control as any}
             disabled={isSubmitting}
-            required
           />
           <div className="w-[45%] text-right">
             <button

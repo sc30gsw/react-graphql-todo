@@ -1,3 +1,4 @@
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import prisma from '../libs/prisma'
 
 export const user = async (
@@ -15,7 +16,10 @@ export const user = async (
 
     return user
   } catch (err) {
-    throw new Error('Internal Server Error')
+    if (err instanceof PrismaClientKnownRequestError)
+      throw new Error('Internal Server Error')
+
+    throw err
   }
 }
 
@@ -35,7 +39,10 @@ export const todos = async (
 
     return todos
   } catch (err) {
-    throw new Error('Internal Server Error')
+    if (err instanceof PrismaClientKnownRequestError)
+      throw new Error('Internal Server Error')
+
+    throw err
   }
 }
 
@@ -55,9 +62,10 @@ export const todo = async (
     if (!todo) throw new Error('Todo not found')
 
     return todo
-  } catch (err: any) {
-    console.log(err.message)
+  } catch (err) {
+    if (err instanceof PrismaClientKnownRequestError)
+      throw new Error('Internal Server Error')
 
-    throw new Error('Internal Server Error')
+    throw err
   }
 }

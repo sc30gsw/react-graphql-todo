@@ -1,3 +1,4 @@
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library'
 import prisma from '../libs/prisma'
 import bcrypt from 'bcrypt'
 import 'dotenv/config'
@@ -38,7 +39,10 @@ export const createUser = async (
       user: newUser,
     }
   } catch (err) {
-    throw new Error('Internal Server Error')
+    if (err instanceof PrismaClientKnownRequestError)
+      throw new Error('Internal Server Error')
+
+    throw err
   }
 }
 
@@ -70,7 +74,10 @@ export const login = async (
 
     return { token, user }
   } catch (err) {
-    throw new Error('Internal Server Error')
+    if (err instanceof PrismaClientKnownRequestError)
+      throw new Error('Internal Server Error')
+
+    throw err
   }
 }
 
@@ -93,7 +100,10 @@ export const createTodo = async (
 
     return newTodo
   } catch (err) {
-    throw new Error('Internal Server Error')
+    if (err instanceof PrismaClientKnownRequestError)
+      throw new Error('Internal Server Error')
+
+    throw err
   }
 }
 
@@ -127,7 +137,10 @@ export const updateTodo = async (
 
     return updatedTodo
   } catch (err) {
-    throw new Error('Internal Server Error')
+    if (err instanceof PrismaClientKnownRequestError)
+      throw new Error('Internal Server Error')
+
+    throw err
   }
 }
 
@@ -155,6 +168,9 @@ export const deleteTodo = async (
 
     return deletedTodo
   } catch (err) {
-    throw new Error('Internal Server Error')
+    if (err instanceof PrismaClientKnownRequestError)
+      throw new Error('Internal Server Error')
+
+    throw err
   }
 }

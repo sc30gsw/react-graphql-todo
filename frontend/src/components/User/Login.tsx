@@ -45,7 +45,7 @@ const Login = () => {
   }
   return (
     <div className="h-full flex flex-col items-center justify-center">
-      <h2 className="font-bold text-xl">Sign Up</h2>
+      <h2 className="font-bold text-xl">Sign In</h2>
       <div className="w-full">
         <form
           className="flex flex-col items-center justify-center gap-3 border py-6 w-1/2 mx-auto mt-5"
@@ -55,11 +55,10 @@ const Login = () => {
             id="email"
             name="email"
             placeholder="Email"
-            type="email"
+            type="text"
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             control={control as any}
             disabled={isSubmitting}
-            required
             autoFocus
           />
           <Input
@@ -70,7 +69,6 @@ const Login = () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             control={control as any}
             disabled={isSubmitting}
-            required
           />
           <div className="w-[45%] text-right">
             <button
