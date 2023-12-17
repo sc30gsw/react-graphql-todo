@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { Todo, User } from '../../generated/graphql'
 import Header from '../Header'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter, Router } from 'react-router-dom'
 import { MockedProvider } from '@apollo/client/testing'
 
 const u = userEvent.setup()
@@ -13,6 +13,7 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockedUsedNavigate,
 }))
+
 describe('Header', () => {
   let user: User
 

@@ -57,7 +57,6 @@ const TodoForm = () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             control={control as any}
             disabled={isSubmitting}
-            required
           />
           <button
             type="submit"

@@ -9,7 +9,7 @@ export const signUpScheme = z.object({
     .string()
     .min(1, 'email is required')
     .max(128, 'please enter at max 128 characters')
-    .email(),
+    .email('format email'),
   password: z
     .string()
     .min(8, 'please enter at least 8 characters')
